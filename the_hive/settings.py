@@ -156,3 +156,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
+
+STATUS_ACTIONS_CODES = [
+    ('buy', 'Buy'),
+    ('sell', 'Sell'),
+    ('book', 'Book'),
+
+]
