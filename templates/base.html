@@ -38,6 +38,12 @@
         {% include 'components/nav.html' %}
         {% block content %}
         {% endblock content %}
+        <div class="clearfix"></div>
+        {% include 'components/contact.html' %}
+        {% include 'components/footer.html' %}
+        {% include 'components/login-modal.html' %}
+        {% include 'components/send-message-modal.html' %}
+        <a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
     </div>
     {% include 'dependancies/js.html' %}
 </body>
