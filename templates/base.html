@@ -1,0 +1,45 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from themezhub.net/rentup-demo/rentup/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 23 Sep 2023 09:37:42 GMT -->
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Themezhub" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block head_title %}RentUP - Residence & Real Estate Template{% endblock head_title %}</title>
+    {% block extra_head %}
+    {% endblock extra_head %}
+
+    {% include 'dependancies/css.html' %}
+
+</head>
+
+<body class="yellow-skin">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader"></div>
+
+    {% if messages %}
+    <div>
+        <strong>{% trans "Messages:" %}</strong>
+        <ul>
+            {% for message in messages %}
+            <li>{{message}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div id="main-wrapper">
+        {% include 'components/nav.html' %}
+        {% block content %}
+        {% endblock content %}
+    </div>
+    {% include 'dependancies/js.html' %}
+</body>
+
+</html>
