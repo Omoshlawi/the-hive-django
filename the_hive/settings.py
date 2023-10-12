@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-fx6ygj5le_p5f(-$cl^==^15vi%c$$ooplacog=qf^3qvu%e+2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -164,3 +164,5 @@ STATUS_ACTIONS_CODES = [
     ('book', 'Book'),
 
 ]
+
+TAGGIT_CASE_INSENSITIVE = True

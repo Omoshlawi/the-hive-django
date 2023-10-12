@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 from properties.utils import property_images, property_unit_images
 
@@ -9,11 +11,17 @@ class PropertyType(models.Model):
     description = models.TextField(null=True, blank=True)
     icon_name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
 
 class PropertyStatus(models.Model):
     name = models.CharField(max_length=20)
     description = models.TextField(null=True, blank=True)
     status_code = models.CharField(max_length=20, unique=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Property(models.Model):
@@ -29,6 +37,9 @@ class Property(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
 
 class PropertyImage(models.Model):
     property = models.ForeignKey("properties.Property", on_delete=models.CASCADE, related_name='images')
@@ -36,6 +47,16 @@ class PropertyImage(models.Model):
     is_primary = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.property.name} image"
+
+
+@receiver(pre_save, sender=PropertyImage)
+def ensure_single_primary_image(sender, instance, **kwargs):
+    if instance.is_primary:
+        # When a new image is marked as primary, unmark all other images for the same property.
+        PropertyImage.objects.filter(property=instance.property).exclude(pk=instance.pk).update(is_primary=False)
 
 
 class PropertyUnit(models.Model):
@@ -47,6 +68,9 @@ class PropertyUnit(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
 
 class PropertyUnitImage(models.Model):
     unit = models.ForeignKey("properties.PropertyUnit", on_delete=models.CASCADE, related_name='images')
@@ -54,6 +78,16 @@ class PropertyUnitImage(models.Model):
     is_primary = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.unit.name} image"
+
+
+@receiver(pre_save, sender=PropertyUnitImage)
+def ensure_single_primary_image(sender, instance, **kwargs):
+    if instance.is_primary:
+        # When a new image is marked as primary, unmark all other images for the same unit.
+        PropertyUnitImage.objects.filter(unit=instance.unit).exclude(pk=instance.pk).update(is_primary=False)
 
 
 class PropertyUnitAmenity(models.Model):
@@ -63,3 +97,6 @@ class PropertyUnitAmenity(models.Model):
     icon_name = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name

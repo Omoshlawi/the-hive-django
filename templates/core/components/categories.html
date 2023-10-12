@@ -17,141 +17,38 @@
 
         <div class="row justify-content-center mt-4">
 
+            {% for category in property_types %}
             <!-- Single Category -->
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="_category_box">
                     <a href="list-layout-with-sidebar.html">
                         <div class="_category_elio">
                             <div class="_category_thumb">
-                                <i class="fa-solid fa-house text-info"></i>
+                                <i id="category-{{ category.id }}" class="fa-solid fa-{{ category.icon_name }}"></i>
                             </div>
                             <div class="_category_caption">
-                                <h5>Office &amp; Studio</h5>
-                                <span>22 Properties</span>
+                                <h5>{{ category.name }}</h5>
+                                <span>{{ category.properties.count }} Properties</span>
                             </div>
                         </div>
                     </a>
                 </div>
             </div>
-
-            <!-- Single Category -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="_category_box">
-                    <a href="list-layout-with-sidebar.html">
-                        <div class="_category_elio">
-                            <div class="_category_thumb">
-                                <i class="fa-solid fa-house-circle-check text-warning"></i>
-                            </div>
-                            <div class="_category_caption">
-                                <h5>Industrial</h5>
-                                <span>22 Properties</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Single Category -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="_category_box">
-                    <a href="list-layout-with-sidebar.html">
-                        <div class="_category_elio">
-                            <div class="_category_thumb">
-                                <i class="fa-solid fa-building text-success"></i>
-                            </div>
-                            <div class="_category_caption">
-                                <h5>Buildings</h5>
-                                <span>85 Properties</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Single Category -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="_category_box">
-                    <a href="list-layout-with-sidebar.html">
-                        <div class="_category_elio">
-                            <div class="_category_thumb">
-                                <i class="fa-solid fa-house-crack text-purple"></i>
-                            </div>
-                            <div class="_category_caption">
-                                <h5>Commercial</h5>
-                                <span>79 Properties</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Single Category -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="_category_box">
-                    <a href="list-layout-with-sidebar.html">
-                        <div class="_category_elio">
-                            <div class="_category_thumb">
-                                <i class="fa-solid fa-house-fire text-seegreen"></i>
-                            </div>
-                            <div class="_category_caption">
-                                <h5>Home &amp; Villas</h5>
-                                <span>22 Properties</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Single Category -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="_category_box">
-                    <a href="list-layout-with-sidebar.html">
-                        <div class="_category_elio">
-                            <div class="_category_thumb">
-                                <i class="fa-solid fa-igloo text-danger"></i>
-                            </div>
-                            <div class="_category_caption">
-                                <h5>Garages</h5>
-                                <span>22 Properties</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Single Category -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="_category_box">
-                    <a href="list-layout-with-sidebar.html">
-                        <div class="_category_elio">
-                            <div class="_category_thumb">
-                                <i class="fa-solid fa-house-laptop text-primary"></i>
-                            </div>
-                            <div class="_category_caption">
-                                <h5>Office &amp; Studio</h5>
-                                <span>72 Properties</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Single Category -->
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="_category_box">
-                    <a href="list-layout-with-sidebar.html">
-                        <div class="_category_elio">
-                            <div class="_category_thumb">
-                                <i class="fa-solid fa-building-circle-check text-orange"></i>
-                            </div>
-                            <div class="_category_caption">
-                                <h5>Apartment</h5>
-                                <span>102 Properties</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
+        {% endfor %}
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const icons = document.querySelectorAll('i[id^="category-"]');
+                const colors = ['info', 'warning', 'success', 'purple', 'seegreen', 'danger', 'primary', 'orange'];
+        
+                icons.forEach(function (icon) {
+                    const randomIndex = Math.floor(Math.random() * colors.length);
+                    const randomColor = colors[randomIndex];
+                    icon.classList.add(`text-${randomColor}`);
+                });
+            });
+        </script>
+        
 
         </div>
 
