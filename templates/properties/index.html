@@ -1,0 +1,460 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- ============================ All Property ================================== -->
+<section class="gray pt-4">
+    <div class="container">
+
+        <div class="row m-0">
+            <div class="short_wraping">
+                <div class="row align-items-center">
+
+                    <div class="col-lg-3 col-md-6 col-sm-12  col-sm-6">
+                        <ul class="shorting_grid">
+                            <li class="list-inline-item"><a href="?display_mode=grid"
+                                    class="{% if display_mode == 'grid' %} active {% endif %}"><span
+                                        class="ti-layout-grid2"></span>Grid</a></li>
+                            <li class="list-inline-item"><a href="?display_mode=list"
+                                    class="{% if display_mode == 'list' %} active {% endif %}"><span
+                                        class="ti-view-list"></span>List</a></li>
+                            <li class="list-inline-item"><a href="#"
+                                    class="{% if display_mode == 'map' %} active {% endif %}"><span
+                                        class="ti-map-alt"></span>Map</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 col-sm-12 order-lg-2 order-md-3 elco_bor col-sm-12">
+                        <div class="shorting_pagination">
+                            <div class="shorting_pagination_laft">
+                                <h5>Showing 1-25 of 72 results</h5>
+                            </div>
+                            <div class="shorting_pagination_right">
+                                <ul>
+                                    <li><a href="javascript:void(0);" class="active">1</a></li>
+                                    <li><a href="javascript:void(0);">2</a></li>
+                                    <li><a href="javascript:void(0);">3</a></li>
+                                    <li><a href="javascript:void(0);">4</a></li>
+                                    <li><a href="javascript:void(0);">5</a></li>
+                                    <li><a href="javascript:void(0);">6</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12 order-lg-3 order-md-2 col-sm-6">
+                        <div class="shorting-right">
+                            <label>Short By:</label>
+                            <div class="dropdown show">
+                                <a class="btn btn-filter dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <span class="selection">Most Rated</span>
+                                </a>
+                                <div class="drp-select dropdown-menu">
+                                    <a class="dropdown-item" href="JavaScript:Void(0);">Most Rated</a>
+                                    <a class="dropdown-item" href="JavaScript:Void(0);">Most Viewd</a>
+                                    <a class="dropdown-item" href="JavaScript:Void(0);">News Listings</a>
+                                    <a class="dropdown-item" href="JavaScript:Void(0);">High Rated</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <!-- property Sidebar -->
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="page-sidebar p-0">
+                    <a class="filter_links" data-bs-toggle="collapse" href="#fltbox" role="button" aria-expanded="false"
+                        aria-controls="fltbox">Open Advance Filter<i class="fa fa-sliders-h ms-2"></i></a>
+                    <div class="collapse" id="fltbox">
+                        <!-- Find New Property -->
+                        <div class="sidebar-widgets p-4">
+
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <input type="text" class="form-control" placeholder="Neighborhood">
+                                    <i class="ti-search"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-with-icon">
+                                    <input type="text" class="form-control" placeholder="Location">
+                                    <i class="ti-location-pin"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="simple-input">
+                                    <select id="ptype" class="form-control">
+                                        <option value="">&nbsp;</option>
+                                        <option value="1">Apartment</option>
+                                        <option value="2">Condo</option>
+                                        <option value="3">Family</option>
+                                        <option value="4">Houses</option>
+                                        <option value="5">Villa</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="simple-input">
+                                    <select id="status" class="form-control">
+                                        <option value="">&nbsp;</option>
+                                        <option value="1">Apartment</option>
+                                        <option value="2">Condo</option>
+                                        <option value="3">Houses</option>
+                                        <option value="4">Villa</option>
+                                        <option value="5">Land</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="simple-input">
+                                    <select id="price" class="form-control">
+                                        <option value="">&nbsp;</option>
+                                        <option value="1">Less Then $1000</option>
+                                        <option value="2">$1000 - $2000</option>
+                                        <option value="3">$2000 - $3000</option>
+                                        <option value="4">$3000 - $4000</option>
+                                        <option value="5">Above $5000</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="simple-input">
+                                    <select id="bedrooms" class="form-control">
+                                        <option value="">&nbsp;</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="simple-input">
+                                    <select id="bathrooms" class="form-control">
+                                        <option value="">&nbsp;</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="simple-input">
+                                    <select id="garage" class="form-control">
+                                        <option value="">&nbsp;</option>
+                                        <option value="1">Any Type</option>
+                                        <option value="2">Yes</option>
+                                        <option value="3">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="simple-input">
+                                    <select id="built" class="form-control">
+                                        <option value="">&nbsp;</option>
+                                        <option value="1">2010</option>
+                                        <option value="2">2011</option>
+                                        <option value="3">2012</option>
+                                        <option value="4">2013</option>
+                                        <option value="5">2014</option>
+                                        <option value="6">2015</option>
+                                        <option value="7">2016</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="simple-input">
+                                            <input type="text" class="form-control" placeholder="Min Area">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="simple-input">
+                                            <input type="text" class="form-control" placeholder="Max Area">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 pt-4 pb-4">
+                                    <h6>Choose Price</h6>
+                                    <div class="rg-slider">
+                                        <input type="text" class="js-range-slider" name="my_range" value="" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 pt-4">
+                                    <h6>Advance Features</h6>
+                                    <ul class="row p-0 m-0">
+                                        <li class="col-lg-6 col-md-6 p-0">
+                                            <input id="a-1" class="form-check-input" name="a-1" type="checkbox">
+                                            <label for="a-1" class="form-check-label">Air Condition</label>
+                                        </li>
+                                        <li class="col-lg-6 col-md-6 p-0">
+                                            <input id="a-2" class="form-check-input" name="a-2" type="checkbox">
+                                            <label for="a-2" class="form-check-label">Bedding</label>
+                                        </li>
+                                        <li class="col-lg-6 col-md-6 p-0">
+                                            <input id="a-3" class="form-check-input" name="a-3" type="checkbox">
+                                            <label for="a-3" class="form-check-label">Heating</label>
+                                        </li>
+                                        <li class="col-lg-6 col-md-6 p-0">
+                                            <input id="a-4" class="form-check-input" name="a-4" type="checkbox">
+                                            <label for="a-4" class="form-check-label">Internet</label>
+                                        </li>
+                                        <li class="col-lg-6 col-md-6 p-0">
+                                            <input id="a-5" class="form-check-input" name="a-5" type="checkbox">
+                                            <label for="a-5" class="form-check-label">Microwave</label>
+                                        </li>
+                                        <li class="col-lg-6 col-md-6 p-0">
+                                            <input id="a-6" class="form-check-input" name="a-6" type="checkbox">
+                                            <label for="a-6" class="form-check-label">Smoking Allow</label>
+                                        </li>
+                                        <li class="col-lg-6 col-md-6 p-0">
+                                            <input id="a-7" class="form-check-input" name="a-7" type="checkbox">
+                                            <label for="a-7" class="form-check-label">Terrace</label>
+                                        </li>
+                                        <li class="col-lg-6 col-md-6 p-0">
+                                            <input id="a-8" class="form-check-input" name="a-8" type="checkbox">
+                                            <label for="a-8" class="form-check-label">Balcony</label>
+                                        </li>
+                                        <li class="col-lg-6 col-md-6 p-0">
+                                            <input id="a-9" class="form-check-input" name="a-9" type="checkbox">
+                                            <label for="a-9" class="form-check-label">Icon</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 pt-4">
+                                    <button class="btn btn-danger full-width">Find New Home</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar End -->
+            </div>
+
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                <div class="row justify-content-center g-4">
+                    {% if properties %}
+                    {% for property in properties %}
+
+                    {% if display_mode == 'list' %}
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="property-listing list_view">
+
+                            <div class="listing-img-wrapper">
+                                <div class="_exlio_125">{{property.status.name}}</div>
+                                <div class="list-img-slide">
+                                    <div class="click">
+                                        {% for image in property.images.all %}
+                                        <div><a href="single-property-1.html"><img src="{{image.image.url}}"
+                                                    class="img-fluid mx-auto" alt=""></a></div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="list_view_flex">
+
+                                <div class="listing-detail-wrapper mt-1">
+                                    <div class="listing-short-detail-wrap">
+                                        <div class="_card_list_flex mb-2">
+                                            <div class="_card_flex_01">
+                                                <span class="_list_blickes _netork">6 Network</span>
+                                                <span class="_list_blickes types">Family</span>
+                                            </div>
+                                            <div class="_card_flex_last">
+                                                <h6 class="listing-card-info-price text-seegreen mb-0">Ksh.
+                                                    {{property.price}}</h6>
+                                            </div>
+                                        </div>
+                                        <div class="_card_list_flex">
+                                            <div class="_card_flex_01">
+                                                <h4 class="listing-name verified"><a href="single-property-1.html"
+                                                        class="prt-link-detail">{{property.full_name}}</a></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="price-features-wrapper">
+                                    <div class="list-fx-features">
+                                        <div class="listing-card-info-icon">
+                                            <div class="inc-fleat-icon"><img src="{% static 'assets/img/bed.svg' %}"
+                                                    width="15" alt="">
+                                            </div>3 Beds
+                                        </div>
+                                        <div class="listing-card-info-icon">
+                                            <div class="inc-fleat-icon"><img src="{% static 'assets/img/bathtub.svg' %}"
+                                                    width="15" alt=""></div>1 Bath
+                                        </div>
+                                        <div class="listing-card-info-icon">
+                                            <div class="inc-fleat-icon"><img src="{% static 'assets/img/move.svg' %}"
+                                                    width="15" alt=""></div>800 sqft
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="listing-detail-footer">
+                                    <div class="footer-first">
+                                        <div class="foot-rates">
+                                            <span class="elio_rate good">4.2</span>
+                                            <div class="_rate_stio">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="footer-flex">
+                                        <a href="property-detail.html" class="prt-view bg-danger">View Detail</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% else %}
+                    <!-- Single Property -->
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="property-listing property-2">
+
+                            <div class="listing-img-wrapper">
+                                <div class="_exlio_125">{{property.status.name}}</div>
+                                <div class="list-img-slide">
+                                    <div class="click">
+                                        {% for image in property.images.all %}
+                                        <div><a href="single-property-1.html"><img src="{{image.image.url}}"
+                                                    class="img-fluid mx-auto" alt="" /></a></div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="listing-detail-wrapper">
+                                <div class="listing-short-detail-wrap">
+                                    <div class="_card_list_flex mb-2">
+                                        <div class="_card_flex_01">
+                                            <span class="_list_blickes _netork">4 Network</span>
+                                            <span class="_list_blickes types">Condos</span>
+                                        </div>
+                                        <div class="_card_flex_last">
+                                            <h6 class="listing-card-info-price text-seegreen mb-0">Ksh.
+                                                {{property.price}}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="_card_list_flex">
+                                        <div class="_card_flex_01">
+                                            <h4 class="listing-name verified"><a href="single-property-1.html"
+                                                    class="prt-link-detail">{{property.full_name}}</a></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="price-features-wrapper">
+                                <div class="list-fx-features">
+                                    <div class="listing-card-info-icon">
+                                        <div class="inc-fleat-icon"><img src="{% static 'assets/img/bed.svg' %}"
+                                                width="15" alt="" />
+                                        </div>4 Beds
+                                    </div>
+                                    <div class="listing-card-info-icon">
+                                        <div class="inc-fleat-icon"><img src="{% static 'assets/img/bathtub.svg' %}"
+                                                width="15" alt="" /></div>2 Bath
+                                    </div>
+                                    <div class="listing-card-info-icon">
+                                        <div class="inc-fleat-icon"><img src="{% static 'assets/img/move.svg' %}"
+                                                width="15" alt="" />
+                                        </div>820 sqft
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="listing-detail-footer">
+                                <div class="footer-first">
+                                    <div class="foot-location"><img src="{% static 'assets/img/pin.svg' %}" width="18"
+                                            alt="" />{{property.property.state}}, {{property.property.city}}</div>
+                                </div>
+                                <div class="footer-flex">
+                                    <ul class="selio_style">
+                                        <li>
+                                            <div class="prt_saveed_12lk">
+                                                <label class="toggler toggler-danger" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" data-bs-title="Save property"><input
+                                                        type="checkbox"><i class="fa-solid fa-heart"></i></label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="prt_saveed_12lk">
+                                                <a href="compare-property.html" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" data-bs-title="Compare property"><i
+                                                        class="fa-solid fa-share"></i></a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="prt_saveed_12lk">
+                                                <a href="single-property-1.html" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" data-bs-title="View Property"><i
+                                                        class="fa-regular fa-circle-right"></i></a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End Single Property -->
+                    {% endif %}
+                    {% endfor %}
+                    {% else %}
+                    <div class="col justify-content-center btn-light-danger">
+
+                        <p class="text-center">No properties</p>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+<!-- ============================ All Property ================================== -->
+
+{% endblock %}

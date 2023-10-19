@@ -11,18 +11,6 @@ from properties.utils import property_images, property_unit_images
 #
 
 
-class PropertyBase(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField(null=True, blank=True)
-    icon_name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        abstract = True
-
-
 class PropertyImageBase(models.Model):
     is_primary = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -32,12 +20,18 @@ class PropertyImageBase(models.Model):
         abstract = True
 
 
-class PropertyType(PropertyBase):
-    pass
+class PropertyType(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(null=True, blank=True)
+    icon_name = models.CharField(max_length=50)
 
+    @property
+    def properties(self):
+        props = PropertyUnit.objects.filter(type__name__in=[self.name])
+        return props
 
-class PropertyUnitType(PropertyBase):
-    parent_type = models.ForeignKey('properties.PropertyType', on_delete=models.CASCADE, related_name='unit_type')
+    def __str__(self):
+        return self.name
 
 
 class PropertyStatus(models.Model):
@@ -76,10 +70,6 @@ class Property(models.Model):
         images = self.images.filter(is_primary=True)
         return images[0] if images.exists() else None
 
-    @property
-    def full_name(self):
-        return f"{self.name}, {self.address} {self.state}, {self.city}"
-
     def __str__(self):
         return self.name if self.name else f"Property({self.id})"
 
@@ -108,13 +98,16 @@ class PropertyUnit(models.Model):
     property = models.ForeignKey("properties.Property", on_delete=models.CASCADE, related_name='units')
     name = models.CharField(max_length=50)
     status = models.ForeignKey("properties.PropertyStatus", on_delete=models.CASCADE, related_name='units')
-    # type = models.ForeignKey('properties.PropertyUnitType', on_delete=models.CASCADE, related_name="units")
     type = TaggableManager(verbose_name='Type Tags')
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
     description = models.TextField(null=True, blank=True)
     published = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    # @property
+    def full_name(self):
+        return f"{self.name}, {self.property.address} {self.property.state}, {self.property.city}"
 
     def __str__(self):
         return self.name

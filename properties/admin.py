@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from properties.models import PropertyType, PropertyStatus, Property, PropertyImage, PropertyUnit, PropertyUnitImage, \
-    PropertyUnitType
+from properties.models import PropertyType, PropertyStatus, Property, PropertyImage, PropertyUnit, PropertyUnitImage
 
 
 # Register your models here.
@@ -9,12 +8,6 @@ from properties.models import PropertyType, PropertyStatus, Property, PropertyIm
 
 @admin.register(PropertyType)
 class PropertyTypeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'icon_name')
-    search_fields = ('name',)
-
-
-@admin.register(PropertyUnitType)
-class PropertyUnitTypeAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'icon_name')
     search_fields = ('name',)
 
@@ -43,7 +36,6 @@ class PropertyAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     inlines = [
         PropertyImageInline,
-        PropertyUnitInline,
     ]
 
 
