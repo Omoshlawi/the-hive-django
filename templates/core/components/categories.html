@@ -16,7 +16,7 @@
         </div>
 
         <div class="row justify-content-center mt-4">
-
+            {% if property_types %}
             {% for category in property_types %}
             <!-- Single Category -->
             <div class="col-lg-3 col-md-4 col-sm-6">
@@ -34,21 +34,28 @@
                     </a>
                 </div>
             </div>
-        {% endfor %}
-        
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const icons = document.querySelectorAll('i[id^="category-"]');
-                const colors = ['info', 'warning', 'success', 'purple', 'seegreen', 'danger', 'primary', 'orange'];
-        
-                icons.forEach(function (icon) {
-                    const randomIndex = Math.floor(Math.random() * colors.length);
-                    const randomColor = colors[randomIndex];
-                    icon.classList.add(`text-${randomColor}`);
+            {% endfor %}
+            {% else %}
+            <div class="col justify-content-center btn-light-danger">
+
+                <p class="text-center">No Categories</p>
+            </div>
+            {% endif %}
+
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const icons = document.querySelectorAll('i[id^="category-"]');
+                    const colors = ['info', 'warning', 'success', 'purple', 'seegreen', 'danger', 'primary', 'orange'];
+
+                    icons.forEach(function (icon) {
+                        const randomIndex = Math.floor(Math.random() * colors.length);
+                        const randomColor = colors[randomIndex];
+                        icon.classList.add(`text-${randomColor}`);
+                    });
                 });
-            });
-        </script>
-        
+            </script>
+
 
         </div>
 

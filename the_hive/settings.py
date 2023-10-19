@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     'core',
     'properties',
+    'taggit'
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 

@@ -1,12 +1,15 @@
 from django.shortcuts import render
 
-from properties.models import PropertyType
+from properties.models import PropertyType, Property, PropertyUnit
 
 
 # Create your views here.
 def index(request):
-    property_types = PropertyType.objects.all()
+    property_types = PropertyType.objects.filter()
+    property_units = PropertyUnit.objects.filter(published=True)
     conntext = {
-        'property_types': property_types
+        'property_types': property_types,
+        'properties': property_units,
+
     }
     return render(request=request, template_name="core/home-5.html", context=conntext)
