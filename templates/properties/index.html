@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+
 {% load static %}
+{% load query_param_tags %}
 
 {% block content %}
 
@@ -13,10 +15,10 @@
 
                     <div class="col-lg-3 col-md-6 col-sm-12  col-sm-6">
                         <ul class="shorting_grid">
-                            <li class="list-inline-item"><a href="?display_mode=grid"
+                            <li class="list-inline-item"><a href="{% add_query_param request 'display_mode' 'grid' %}"
                                     class="{% if display_mode == 'grid' %} active {% endif %}"><span
                                         class="ti-layout-grid2"></span>Grid</a></li>
-                            <li class="list-inline-item"><a href="?display_mode=list"
+                            <li class="list-inline-item"><a href="{% add_query_param request 'display_mode' 'list' %}"
                                     class="{% if display_mode == 'list' %} active {% endif %}"><span
                                         class="ti-view-list"></span>List</a></li>
                             <li class="list-inline-item"><a href="#"
@@ -33,12 +35,16 @@
                             </div>
                             <div class="shorting_pagination_right">
                                 <ul>
-                                    <li><a href="javascript:void(0);" class="active">1</a></li>
-                                    <li><a href="javascript:void(0);">2</a></li>
-                                    <li><a href="javascript:void(0);">3</a></li>
-                                    <li><a href="javascript:void(0);">4</a></li>
-                                    <li><a href="javascript:void(0);">5</a></li>
-                                    <li><a href="javascript:void(0);">6</a></li>
+                                    {% for page_number in properties.adjusted_elided_pages %}
+                                    {% if page_number == properties.paginator.ELLIPSIS %}
+                                    <li><a href="javascript:void(0);">{{page_number}}</a></li>
+                                    {% else %}
+                                    <li><a href="{% add_query_param request 'page' page_number %}"
+                                            class="{% if page_number == properties.number %}active{% endif %}">{{page_number}}</a>
+                                    </li>
+
+                                    {% endif %}
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -350,7 +356,7 @@
                     {% else %}
                     <!-- Single Property -->
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="property-listing property-2">
+                        <div class="property-listing property-2" style="min-height: 100%;">
 
                             <div class="listing-img-wrapper">
                                 <div class="_exlio_125">{{property.status.name}}</div>
