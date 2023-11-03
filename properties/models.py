@@ -105,6 +105,10 @@ class PropertyUnit(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    def primary_image(self):
+        images = self.images.filter(is_primary=True)
+        return images.first() if images.exists() else None
+
     # @property
     def full_name(self):
         return f"{self.name}, {self.property.address} {self.property.state}, {self.property.city}"

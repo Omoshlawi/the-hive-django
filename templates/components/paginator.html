@@ -1,0 +1,40 @@
+{% load query_param_tags %}
+
+<div class="shorting_pagination">
+    <div class="shorting_pagination_laft">
+        <h5>Showing {{ page.start_index }}-{{ page.end_index }} of {{ page.paginator.count }} results</h5>
+    </div>
+    <div class="shorting_pagination_right">
+        <ul>
+            {% for page_number in page.adjusted_elided_pages %}
+            {% if page_number == page.paginator.ELLIPSIS %}
+            <li><a href="javascript:void(0);">{{page_number}}</a></li>
+            {% else %}
+            <li><a href="{% add_query_param request 'page' page_number %}"
+                    class="{% if page_number == page.number %}active{% endif %}">{{page_number}}</a>
+            </li>
+
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<div class="shorting-right">
+    <label>Page size:</label>
+    <div class="dropdown show">
+        <a class="btn btn-filter dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <span class="selection">{{request.GET.page_size}}</span>
+        </a>
+        <div class="drp-select dropdown-menu">
+            <a class="dropdown-item {% if request.GET.page_size == '4'  %} active {% endif %}"
+                href="{% add_query_param request 'page_size' 4 %}">4</a>
+            <a class="dropdown-item {% if request.GET.page_size == '10'  %} active {% endif %} "
+                href="{% add_query_param request 'page_size' 10 %}">10</a>
+            <a class="dropdown-item {% if request.GET.page_size == '20'  %} active {% endif %}"
+                href="{% add_query_param request 'page_size' 20 %}">20</a>
+            <a class="dropdown-item {% if request.GET.page_size == '50'  %} active {% endif %}"
+                href="{% add_query_param request 'page_size' 50 %}">50</a>
+        </div>
+    </div>
+</div>

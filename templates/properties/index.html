@@ -2,7 +2,7 @@
 
 {% load static %}
 {% load query_param_tags %}
-
+{% load humanize %}
 {% block content %}
 
 <!-- ============================ All Property ================================== -->
@@ -29,25 +29,7 @@
                     </div>
 
                     <div class="col-lg-6 col-md-12 col-sm-12 order-lg-2 order-md-3 elco_bor col-sm-12">
-                        <div class="shorting_pagination">
-                            <div class="shorting_pagination_laft">
-                                <h5>Showing 1-25 of 72 results</h5>
-                            </div>
-                            <div class="shorting_pagination_right">
-                                <ul>
-                                    {% for page_number in properties.adjusted_elided_pages %}
-                                    {% if page_number == properties.paginator.ELLIPSIS %}
-                                    <li><a href="javascript:void(0);">{{page_number}}</a></li>
-                                    {% else %}
-                                    <li><a href="{% add_query_param request 'page' page_number %}"
-                                            class="{% if page_number == properties.number %}active{% endif %}">{{page_number}}</a>
-                                    </li>
-
-                                    {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
+                        {% include 'components/paginator.html' with page=property_list %}
                     </div>
 
                     <div class="col-lg-3 col-md-6 col-sm-12 order-lg-3 order-md-2 col-sm-6">
@@ -272,8 +254,8 @@
 
             <div class="col-lg-8 col-md-12 col-sm-12">
                 <div class="row justify-content-center g-4">
-                    {% if properties %}
-                    {% for property in properties %}
+                    {% if property_list %}
+                    {% for property in property_list %}
 
                     {% if display_mode == 'list' %}
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
@@ -284,8 +266,9 @@
                                 <div class="list-img-slide">
                                     <div class="click">
                                         {% for image in property.images.all %}
-                                        <div><a href="single-property-1.html"><img src="{{image.image.url}}"
-                                                    class="img-fluid mx-auto" alt=""></a></div>
+                                        <div><a href="{% url 'properties:property-detail' property.id %}"><img
+                                                    src="{{image.image.url}}" class="img-fluid mx-auto" alt=""></a>
+                                        </div>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -297,17 +280,18 @@
                                     <div class="listing-short-detail-wrap">
                                         <div class="_card_list_flex mb-2">
                                             <div class="_card_flex_01">
-                                                <span class="_list_blickes _netork">6 Network</span>
-                                                <span class="_list_blickes types">Family</span>
+                                                <span
+                                                    class="_list_blickes types">{{property.update_at|naturalday}}</span>
                                             </div>
                                             <div class="_card_flex_last">
                                                 <h6 class="listing-card-info-price text-seegreen mb-0">Ksh.
-                                                    {{property.price}}</h6>
+                                                    {{property.price|intcomma}}</h6>
                                             </div>
                                         </div>
                                         <div class="_card_list_flex">
                                             <div class="_card_flex_01">
-                                                <h4 class="listing-name verified"><a href="single-property-1.html"
+                                                <h4 class="listing-name verified"><a
+                                                        href="{% url 'properties:property-detail' property.id %}"
                                                         class="prt-link-detail">{{property.full_name}}</a></h4>
                                             </div>
                                         </div>
@@ -363,8 +347,9 @@
                                 <div class="list-img-slide">
                                     <div class="click">
                                         {% for image in property.images.all %}
-                                        <div><a href="single-property-1.html"><img src="{{image.image.url}}"
-                                                    class="img-fluid mx-auto" alt="" /></a></div>
+                                        <div><a href="{% url 'properties:property-detail' property.id %}"><img
+                                                    src="{{image.image.url}}" class="img-fluid mx-auto" alt="" /></a>
+                                        </div>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -374,17 +359,17 @@
                                 <div class="listing-short-detail-wrap">
                                     <div class="_card_list_flex mb-2">
                                         <div class="_card_flex_01">
-                                            <span class="_list_blickes _netork">4 Network</span>
-                                            <span class="_list_blickes types">Condos</span>
+                                            <span class="_list_blickes types">{{property.created_at|naturalday}}</span>
                                         </div>
                                         <div class="_card_flex_last">
                                             <h6 class="listing-card-info-price text-seegreen mb-0">Ksh.
-                                                {{property.price}}</h6>
+                                                {{property.price|intcomma}}</h6>
                                         </div>
                                     </div>
                                     <div class="_card_list_flex">
                                         <div class="_card_flex_01">
-                                            <h4 class="listing-name verified"><a href="single-property-1.html"
+                                            <h4 class="listing-name verified"><a
+                                                    href="{% url 'properties:property-detail' property.id %}"
                                                     class="prt-link-detail">{{property.full_name}}</a></h4>
                                         </div>
                                     </div>
@@ -433,8 +418,9 @@
                                         </li>
                                         <li>
                                             <div class="prt_saveed_12lk">
-                                                <a href="single-property-1.html" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="View Property"><i
+                                                <a href="{% url 'properties:property-detail' property.id %}"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    data-bs-title="View Property"><i
                                                         class="fa-regular fa-circle-right"></i></a>
                                             </div>
                                         </li>

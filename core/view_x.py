@@ -1,5 +1,7 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import QuerySet
+from django.http import HttpResponse, Http404
+from django.shortcuts import render
 from django.views import View
 from django_filters import FilterSet
 
@@ -14,6 +16,18 @@ class ViewX(View):
     queryset: QuerySet = None
     page_size: int = 10
     page_lookup: str = 'page'
+    list_template: str = 'list.html'
+    detail_template: str = 'detail.html'
+    object_lookup: str = "objects"
+
+    def get_object_lookup(self):
+        return self.object_lookup
+
+    def get_list_template(self):
+        return self.list_template
+
+    def get_detail_template(self):
+        return self.detail_template
 
     def get_page_size(self) -> int:
         return self.page_size
@@ -57,3 +71,34 @@ class ViewX(View):
 
     def get_queryset(self) -> QuerySet:
         return self.queryset
+
+    def get(self, request, *args, **kwargs) -> HttpResponse:
+        if (args or kwargs):
+            return self.detail(request, *args, **kwargs)
+        else:
+            return self.list(request)
+
+    def get_context(self, request) -> dict:
+        filtered = self.filter_objects(request, queryset=self.get_queryset())
+        properties = self.paginate_objects(request, filtered)
+        context = {
+            self.get_object_lookup(): properties,
+        }
+        return context
+
+    def list(self, request) -> HttpResponse:
+        context = self.get_context(request)
+        key = self.get_object_lookup()
+        value = context.pop(key)
+        context.update({f'{key}_list': value})
+        return render(request, self.get_list_template(), context)
+
+    def detail(self, request, *args, **kwargs) -> HttpResponse:
+        key = self.get_object_lookup() + '_detail'
+        value = self.get_queryset().filter(**kwargs)
+        if not value.exists():
+            raise Http404()
+        context = {
+            key: value.first()
+        }
+        return render(request, self.get_detail_template(), context)

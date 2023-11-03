@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_filters',
     'corsheaders',
+    'django.contrib.humanize',
 
     # allauth
     'allauth',
@@ -142,7 +143,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'core.pagination.SizedPaginator',
     'PAGE_SIZE': 10,
@@ -157,7 +157,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
-
 
 STATUS_ACTIONS_CODES = [
     ('buy', 'Buy'),

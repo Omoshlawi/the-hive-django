@@ -21,7 +21,7 @@
             <!-- Single Category -->
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="_category_box">
-                    <a href="list-layout-with-sidebar.html">
+                    <a href="{% url 'properties:property-list' %}?category={{category}}">
                         <div class="_category_elio">
                             <div class="_category_thumb">
                                 <i id="category-{{ category.id }}" class="fa-solid fa-{{ category.icon_name }}"></i>

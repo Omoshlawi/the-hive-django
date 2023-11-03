@@ -26,8 +26,8 @@
                         <div class="list-img-slide">
                             <div class="click">
                                 {% for image in property.images.all %}
-                                <div><a href="single-property-1.html"><img src="{{image.image.url}}"
-                                            class="img-fluid mx-auto" alt="" /></a>
+                                <div><a href="{% url 'properties:property-detail' property.id %}"><img
+                                            src="{{image.image.url}}" class="img-fluid mx-auto" alt="" /></a>
                                 </div>
                                 {% endfor %}
                             </div>
@@ -50,7 +50,8 @@
                             </div>
                             <div class="_card_list_flex">
                                 <div class="_card_flex_01">
-                                    <h4 class="listing-name verified"><a href="single-property-1.html"
+                                    <h4 class="listing-name verified"><a
+                                            href="{% url 'properties:property-detail' property.id %}"
                                             class="prt-link-detail">{{property.full_name}}</a></h4>
                                 </div>
                             </div>
@@ -102,7 +103,7 @@
         <!-- Pagination -->
         <div class="row mt-5">
             <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                <a href="list-layout-with-map.html" class="btn btn-light-danger">Explore More Properties</a>
+                <a href="{% url 'properties:property-list' %}" class="btn btn-light-danger">Explore More Properties</a>
             </div>
         </div>
 
