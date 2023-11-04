@@ -30,14 +30,10 @@
 
 <div class="featured_slick_gallery gray d-block d-md-block d-lg-block d-xl-none">
 	<div class="featured_slick_gallery-slide">
-		<div class="featured_slick_padd"><a href="assets/img/slider-2.jpg" class="mfp-gallery"><img
-					src="{% static 'assets/img/slider-2.jpg' %}" class="img-fluid mx-auto" alt="" /></a></div>
-		<div class="featured_slick_padd"><a href="assets/img/slider-3.jpg" class="mfp-gallery"><img
-					src="{% static 'assets/img/slider-3.jpg' %}" class="img-fluid mx-auto" alt="" /></a></div>
-		<div class="featured_slick_padd"><a href="assets/img/slider-4.jpg" class="mfp-gallery"><img
-					src="{% static 'assets/img/slider-4.jpg' %}" class="img-fluid mx-auto" alt="" /></a></div>
-		<div class="featured_slick_padd"><a href="assets/img/slider-5.jpg" class="mfp-gallery"><img
-					src="{% static 'assets/img/slider-5.jpg' %}" class="img-fluid mx-auto" alt="" /></a></div>
+		{% for image in property_detail.images.all %}
+		<div class="featured_slick_padd"><a href="{{image.image.url}}" class="mfp-gallery"><img
+					src="{{image.image.url}}" class="img-fluid mx-auto" alt="" /></a></div>
+		{% endfor %}
 	</div>
 </div>
 <!-- ============================ Hero Banner End ================================== -->
@@ -61,7 +57,8 @@
 								<li><span class="sqft fw-medium rounded">800 sqft</span></li>
 							</ul>
 							<h2>{{property_detail.full_name}}</h2>
-							<span><i class="lni-map-marker"></i> 778 Country St. Panama City, FL</span>
+							<span><i class="lni-map-marker"></i> {{property_detail.address}},
+								FL</span>
 						</div>
 					</div>
 
@@ -722,7 +719,8 @@
 					<div class="sider_blocks_wrap">
 						<div class="side-booking-header">
 							<div class="sb-header-left">
-								<h3 class="price">$470<sub>/Night</sub><span class="offs">$510</span></h3>
+								<h3 class="price">{{property_detail.price | intcomma}}<sub>/Night</sub><span
+										class="offs">$510</span></h3>
 							</div>
 							<div class="price_offer bg-seegreen">20% Off</div>
 						</div>

@@ -13,3 +13,7 @@ def index(request):
 
     }
     return render(request=request, template_name="core/home-5.html", context=conntext)
+
+
+def pricing(request):
+    return render(request, 'core/pricing.html')

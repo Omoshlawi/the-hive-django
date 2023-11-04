@@ -4,7 +4,8 @@ from django.views import View
 
 from core.view_x import ViewX
 from properties.filters import PropertyFilterSet
-from properties.models import PropertyUnit
+from properties.models import PropertyUnit, PropertyStatus
+from taggit.models import Tag
 
 
 # Create your views here.
@@ -20,5 +21,9 @@ class PropertyView(ViewX):
     def get_context(self, request) -> dict:
         display_mode = request.GET.get('display_mode', 'list')
         context = super().get_context(request)
-        context.update({'display_mode': display_mode})
+        context.update({
+            'display_mode': display_mode,
+            'tags': Tag.objects.all(),
+            'status': PropertyStatus.objects.all()
+        })
         return context

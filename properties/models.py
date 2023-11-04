@@ -50,9 +50,6 @@ class PropertyStatus(models.Model):
 
 class Property(models.Model):
     name = models.CharField(max_length=50, null=True, blank=True)
-    # type = models.ForeignKey("properties.PropertyType", on_delete=models.CASCADE, related_name='properties')
-    # type = models.CharField(max_length=255)
-    # status = models.ForeignKey("properties.PropertyStatus", on_delete=models.CASCADE, related_name='properties')
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
     description = models.TextField(null=True, blank=True)
     address = models.CharField(max_length=50)
@@ -62,8 +59,13 @@ class Property(models.Model):
     longitude = models.DecimalField(max_digits=22, decimal_places=16)
     latitude = models.DecimalField(max_digits=22, decimal_places=16)
     size = models.CharField(max_length=255)
+    date_build = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def fq_address(self):
+        return f"{self.zipcode} {self.state} {self.address}, {self.city}"
 
     @property
     def primary_image(self):
@@ -104,6 +106,10 @@ class PropertyUnit(models.Model):
     published = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+
+    def address(self):
+        return self.property.fq_address
 
     def primary_image(self):
         images = self.images.filter(is_primary=True)
