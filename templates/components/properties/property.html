@@ -1,0 +1,22 @@
+<!-- 
+    args: 
+    - parent_class, 
+    - child_path, 
+    - empty_message, 
+    - properties
+    - child_root_class
+ -->
+
+
+<div class="row justify-content-center g-4">
+    {% if properties %}
+    {% for property in properties %}
+    {% include child_path with property=property root_class=child_root_class %}
+    {% endfor %}
+    {% else %}
+    <div class="col justify-content-center btn-light-danger">
+        <p class="text-center">{{empty_message}}</p>
+    </div>
+    {% endif %}
+
+</div>

@@ -1,0 +1,78 @@
+{% load static %}
+{% load humanize %}
+<!-- 
+    args: 
+    -   property
+    -   root_class(Optional)
+
+    Parent class = row justify-content-center g-4
+ -->
+<!-- Single Property -->
+<div class="{% if root_class %} {{root_class}} {% else %}col-lg-4 col-md-6 col-sm-12 {% endif %}">
+    <div class="property-listing property-2 h-100">
+
+        <div class="listing-img-wrapper">
+            <div class="_exlio_125">{{property.status.name}}</div>
+            <div class="list-img-slide">
+                <div class="click">
+                    {% for image in property.images.all %}
+                    <div><a href="{% url 'properties:property-detail' property.id %}"><img src="{{image.image.url}}"
+                                class="img-fluid mx-auto" alt="" /></a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="listing-detail-wrapper">
+            <div class="listing-short-detail-wrap">
+                <div class="_card_list_flex mb-2">
+                    <div class="_card_flex_01">
+                        <span class="_list_blickes _netork">{{property.units.count}} Units</span>
+                        <span class="_list_blickes types">{{property.type.name}}</span>
+                    </div>
+                    <div class="_card_flex_last">
+                        <div class="prt_saveed_12lk">
+                            <label class="toggler toggler-danger"><input type="checkbox"><i
+                                    class="ti-heart"></i></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="_card_list_flex">
+                    <div class="_card_flex_01">
+                        <h4 class="listing-name verified"><a href="{% url 'properties:property-detail' property.id %}"
+                                class="prt-link-detail">{{property.full_name}}</a></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="price-features-wrapper">
+            <div class="list-fx-features">
+                <div class="listing-card-info-icon">
+                    <div class="inc-fleat-icon"><img src="{% static 'assets/img/bed.svg' %}" width="15" alt="" />
+                    </div>3 Beds
+                </div>
+                <div class="listing-card-info-icon">
+                    <div class="inc-fleat-icon"><img src="{% static 'assets/img/bathtub.svg' %}" width="15" alt="" />
+                    </div>1 Bath
+                </div>
+                <div class="listing-card-info-icon">
+                    <div class="inc-fleat-icon"><img src="{% static 'assets/img/move.svg' %}" width="15" alt="" />
+                    </div>{{property.size}}
+                </div>
+            </div>
+        </div>
+
+        <div class="listing-detail-footer">
+            <div class="footer-first">
+                <h6 class="listing-card-info-price mb-0 p-0">Ksh. {{property.price| intcomma}}</h6>
+            </div>
+            <div class="footer-flex">
+                <a href="{% url 'properties:property-detail' property.id %}" class="prt-view">View Detail</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- End Single Property -->

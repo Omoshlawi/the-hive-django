@@ -1,0 +1,98 @@
+{% load static %}
+{% load humanize %}
+
+<!-- 
+    args: 
+    -   property
+    -   root_class(Optional)
+
+
+    Parent class = row justify-content-center g-4
+ -->
+
+<!-- Single Property -->
+<div class="{% if root_class %} {{root_class}} {% else %}col-lg-6 col-md-6 col-sm-12{% endif %}">
+    <div class="property-listing property-2">
+
+        <div class="listing-img-wrapper">
+            <div class="_exlio_125">{{property.status.name}}</div>
+            <div class="list-img-slide">
+                <div class="click">
+                    {% for image in property.images.all %}
+                    <div><a href="{% url 'properties:property-detail' property.id %}"><img src="{{image.image.url}}"
+                                class="img-fluid mx-auto" alt=""></a></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="listing-detail-wrapper">
+            <div class="listing-short-detail-wrap">
+                <div class="_card_list_flex mb-2">
+                    <div class="_card_flex_01">
+                        <span class="_list_blickes _netork">{{property.units.count}} Units</span>
+                        <span class="_list_blickes types">{{property.type.name}}</span>
+                    </div>
+                    <div class="_card_flex_last">
+                        <h6 class="listing-card-info-price text-seegreen mb-0">Ksh. {{property.price | intcomma}}</h6>
+                    </div>
+                </div>
+                <div class="_card_list_flex">
+                    <div class="_card_flex_01">
+                        <h4 class="listing-name verified"><a href="{% url 'properties:property-detail' property.id %}"
+                                class="prt-link-detail">{{property.full_name}}</a></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="price-features-wrapper">
+            <div class="list-fx-features">
+                <div class="listing-card-info-icon">
+                    <div class="inc-fleat-icon"><img src="{% static 'assets/img/bed.svg' %}" width="15" alt=""></div>4
+                    Beds
+                </div>
+                <div class="listing-card-info-icon">
+                    <div class="inc-fleat-icon"><img src="{% static 'assets/img/bathtub.svg' %}" width="15" alt="">
+                    </div>2 Bath
+                </div>
+                <div class="listing-card-info-icon">
+                    <div class="inc-fleat-icon"><img src="{% static 'assets/img/move.svg' %}" width="15" alt=""></div>
+                    {{property.size}}
+                </div>
+            </div>
+        </div>
+
+        <div class="listing-detail-footer">
+            <div class="footer-first">
+                <div class="foot-location"><img src="{% static 'assets/img/pin.svg' %}" width="18"
+                        alt="">{{property.state}}, {{property.city}}</div>
+            </div>
+            <div class="footer-flex">
+                <ul class="selio_style">
+                    <li>
+                        <div class="prt_saveed_12lk">
+                            <label class="toggler toggler-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+                                data-bs-title="Save property"><input type="checkbox"><i
+                                    class="fa-solid fa-heart"></i></label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="prt_saveed_12lk">
+                            <a href="compare-property.html" data-bs-toggle="tooltip" data-bs-placement="top"
+                                data-bs-title="Compare property"><i class="fa-solid fa-share"></i></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="prt_saveed_12lk">
+                            <a href="{% url 'properties:property-detail' property.id %}" data-bs-toggle="tooltip"
+                                data-bs-placement="top" data-bs-title="View Property"><i
+                                    class="fa-regular fa-circle-right"></i></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
