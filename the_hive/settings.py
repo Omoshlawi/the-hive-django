@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'sass',
     'agencies',
     'agents',
+    'stakeholders'
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 

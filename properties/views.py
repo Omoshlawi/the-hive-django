@@ -13,7 +13,7 @@ from taggit.models import Tag
 class PropertyView(ViewX):
     template_path = "properties/index.html"
     filterset_class = PropertyFilterSet
-    queryset = PropertyUnit.objects.filter(published=True)
+    queryset = PropertyUnit.published_objects.all()
     object_lookup = 'property'
     list_template = 'properties/index.html'
     detail_template = 'properties/single-property-1.html'

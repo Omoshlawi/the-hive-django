@@ -31,194 +31,37 @@
 
 		<div class="row g-4">
 
+			{% if agency_list %}
+
+			{% for agency in agency_list %}
 			<!-- Single Agent -->
 			<div class="col-lg-4 col-md-6 col-sm-12">
 				<div class="agency_gridio_wrap">
 					<div class="agency_gridio_header"
 						style="background:#d2382d url(../../static/assets/img/bg2.png)no-repeat">
-						<span class="agents_count">22 Agents</span>
+						<span class="agents_count">{{agency.agents.count}} Agents</span>
+						
 					</div>
 					<div class="agency_gridio_caption">
 						<div class="agency_gridio_thumb">
-							<a href="agency-page.html"><img src="{% static 'assets/img/brand-4.png' %}"
-									class="img-fluid" alt="" /></a>
+							<a href="agency-page.html"><img src="{{agency.logo.url}}" class="img-fluid" alt="" /></a>
 						</div>
 						<div class="agency_gridio_txt">
-							<h4><a href="agency-page.html">California Real Estate</a></h4>
-							<span class="agt_gridio_ocat">Liverpool. London</span>
-							<a href="agency-page.html" class="vew_agency_btn">View Agency</a>
+							<h4><a href="agency-page.html">{{agency.name}}</a></h4>
+							<span class="agt_gridio_ocat">{{agency.fq_address}}</span>
+							<a href="{% url 'agencies:agency-detail' agency.id %}" class="vew_agency_btn">View
+								Agency</a>
 						</div>
 					</div>
 				</div>
 			</div>
+			{% endfor %}
+			{% else %}
+			<div class="col justify-content-center btn-light-danger">
 
-			<!-- Single Agent -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="agency_gridio_wrap">
-					<div class="agency_gridio_header"
-						style="background:#4253b1 url(../../static/assets/img/bg2.png)no-repeat">
-						<span class="agents_count">22 Agents</span>
-					</div>
-					<div class="agency_gridio_caption">
-						<div class="agency_gridio_thumb">
-							<a href="agency-page.html"><img src="{% static 'assets/img/brand-5.png' %}"
-									class="img-fluid" alt="" /></a>
-						</div>
-						<div class="agency_gridio_txt">
-							<h4><a href="agency-page.html">Realtors With Zeal</a></h4>
-							<span class="agt_gridio_ocat">Liverpool. London</span>
-							<a href="agency-page.html" class="vew_agency_btn">View Agency</a>
-						</div>
-					</div>
-				</div>
+				<p class="text-center">No Agencies</p>
 			</div>
-
-			<!-- Single Agent -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="agency_gridio_wrap">
-					<div class="agency_gridio_header"
-						style="background:#40ad44 url(../../static/assets/img/bg2.png)no-repeat">
-						<span class="agents_count">22 Agents</span>
-					</div>
-					<div class="agency_gridio_caption">
-						<div class="agency_gridio_thumb">
-							<a href="agency-page.html"><img src="{% static 'assets/img/brand-6.png' %}"
-									class="img-fluid" alt="" /></a>
-						</div>
-						<div class="agency_gridio_txt">
-							<h4><a href="agency-page.html">Liberty Property Adviser</a></h4>
-							<span class="agt_gridio_ocat">Liverpool. London</span>
-							<a href="agency-page.html" class="vew_agency_btn">View Agency</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Single Agent -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="agency_gridio_wrap">
-					<div class="agency_gridio_header"
-						style="background:#0d9ada url(../../static/assets/img/bg2.png)no-repeat">
-						<span class="agents_count">22 Agents</span>
-					</div>
-					<div class="agency_gridio_caption">
-						<div class="agency_gridio_thumb">
-							<a href="agency-page.html"><img src="{% static 'assets/img/brand-1.png' %}"
-									class="img-fluid" alt="" /></a>
-						</div>
-						<div class="agency_gridio_txt">
-							<h4><a href="agency-page.html">Jumbo Real Estate</a></h4>
-							<span class="agt_gridio_ocat">Liverpool. London</span>
-							<a href="agency-page.html" class="vew_agency_btn">View Agency</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Single Agent -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="agency_gridio_wrap">
-					<div class="agency_gridio_header"
-						style="background:#795548 url(../../static/assets/img/bg2.png)no-repeat">
-						<span class="agents_count">22 Agents</span>
-					</div>
-					<div class="agency_gridio_caption">
-						<div class="agency_gridio_thumb">
-							<a href="agency-page.html"><img src="{% static 'assets/img/brand-2.png' %}"
-									class="img-fluid" alt="" /></a>
-						</div>
-						<div class="agency_gridio_txt">
-							<h4><a href="agency-page.html">Vantage Point Properties</a></h4>
-							<span class="agt_gridio_ocat">Liverpool. London</span>
-							<a href="agency-page.html" class="vew_agency_btn">View Agency</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Single Agent -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="agency_gridio_wrap">
-					<div class="agency_gridio_header"
-						style="background:#b2bf2c url(../../static/assets/img/bg2.png)no-repeat">
-						<span class="agents_count">22 Agents</span>
-					</div>
-					<div class="agency_gridio_caption">
-						<div class="agency_gridio_thumb">
-							<a href="agency-page.html"><img src="{% static 'assets/img/brand-3.png' %}"
-									class="img-fluid" alt="" /></a>
-						</div>
-						<div class="agency_gridio_txt">
-							<h4><a href="agency-page.html">Coastal Premier Properties</a></h4>
-							<span class="agt_gridio_ocat">Liverpool. London</span>
-							<a href="agency-page.html" class="vew_agency_btn">View Agency</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Single Agent -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="agency_gridio_wrap">
-					<div class="agency_gridio_header"
-						style="background:#673ab7 url(../../static/assets/img/bg2.png)no-repeat">
-						<span class="agents_count">22 Agents</span>
-					</div>
-					<div class="agency_gridio_caption">
-						<div class="agency_gridio_thumb">
-							<a href="agency-page.html"><img src="{% static 'assets/img/brand-4.png' %}"
-									class="img-fluid" alt="" /></a>
-						</div>
-						<div class="agency_gridio_txt">
-							<h4><a href="agency-page.html">Urban Pacific Real Estate</a></h4>
-							<span class="agt_gridio_ocat">Liverpool. London</span>
-							<a href="agency-page.html" class="vew_agency_btn">View Agency</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Single Agent -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="agency_gridio_wrap">
-					<div class="agency_gridio_header"
-						style="background:#dc2b67 url(../../static/assets/img/bg2.png)no-repeat">
-						<span class="agents_count">22 Agents</span>
-					</div>
-					<div class="agency_gridio_caption">
-						<div class="agency_gridio_thumb">
-							<a href="agency-page.html"><img src="{% static 'assets/img/brand-5.png' %}"
-									class="img-fluid" alt="" /></a>
-						</div>
-						<div class="agency_gridio_txt">
-							<h4><a href="agency-page.html">American Realty Brokers</a></h4>
-							<span class="agt_gridio_ocat">Liverpool. London</span>
-							<a href="agency-page.html" class="vew_agency_btn">View Agency</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Single Agent -->
-			<div class="col-lg-4 col-md-6 col-sm-12">
-				<div class="agency_gridio_wrap">
-					<div class="agency_gridio_header"
-						style="background:#2363b3 url(../../static/assets/img/bg2.png)no-repeat">
-						<span class="agents_count">22 Agents</span>
-					</div>
-					<div class="agency_gridio_caption">
-						<div class="agency_gridio_thumb">
-							<a href="agency-page.html"><img src="{% static 'assets/img/brand-6.png' %}"
-									class="img-fluid" alt="" /></a>
-						</div>
-						<div class="agency_gridio_txt">
-							<h4><a href="agency-page.html">Equity Point Real Estate</a></h4>
-							<span class="agt_gridio_ocat">Liverpool. London</span>
-							<a href="agency-page.html" class="vew_agency_btn">View Agency</a>
-						</div>
-					</div>
-				</div>
-			</div>
+			{% endif %}
 
 		</div>
 

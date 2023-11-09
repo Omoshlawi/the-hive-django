@@ -2,6 +2,8 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from taggit.managers import TaggableManager
+
+from core.models_x import PublishableModel
 from properties.utils import property_images, property_unit_images
 
 
@@ -96,16 +98,19 @@ def ensure_single_primary_image(sender, instance, **kwargs):
         PropertyImage.objects.filter(property=instance.property).exclude(pk=instance.pk).update(is_primary=False)
 
 
-class PropertyUnit(models.Model):
+class PropertyUnit(PublishableModel):
     property = models.ForeignKey("properties.Property", on_delete=models.CASCADE, related_name='units')
     name = models.CharField(max_length=50)
     status = models.ForeignKey("properties.PropertyStatus", on_delete=models.CASCADE, related_name='units')
     type = TaggableManager(verbose_name='Type Tags')
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
     description = models.TextField(null=True, blank=True)
-    published = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
+    agent = models.ForeignKey("agents.Agent", on_delete=models.SET_NULL, null=True, blank=True,
+                              related_name='assigned_units')
+    owner = models.ForeignKey("stakeholders.PropertyOwner", on_delete=models.SET_NULL, null=True, blank=True,
+                              related_name='owned_units')
+    agency = models.ForeignKey("agencies.Agency", on_delete=models.SET_NULL, null=True, blank=True,
+                               related_name='listed_units')
 
     def address(self):
         return self.property.fq_address

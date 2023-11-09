@@ -53,7 +53,7 @@ class PropertyAdmin(admin.ModelAdmin):
 
 @admin.register(PropertyUnit)
 class PropertyUnitAdmin(admin.ModelAdmin):
-    list_display = ('name', 'status', 'price', 'published', 'created_at', 'update_at')
+    list_display = ('name', 'status', 'price', 'published', 'created_at', 'updated_at')
     list_editable = ['published']
     search_fields = ('name',)
     autocomplete_fields = ('property', 'type', 'status')
