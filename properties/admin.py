@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from properties.models import PropertyType, PropertyStatus, Property, PropertyImage, PropertyUnit, PropertyUnitImage
+from properties.models import PropertyType, PropertyStatus, Property, PropertyImage, PropertyUnit, PropertyUnitImage, \
+    PropertyAmenity, Amenity
 
 
 # Register your models here.
-
 
 @admin.register(PropertyType)
 class PropertyTypeAdmin(admin.ModelAdmin):
@@ -18,8 +18,20 @@ class PropertyStatusAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 
+@admin.register(Amenity)
+class AmenityAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description', 'icon_name')
+    search_fields = ('name',)
+
+
 class PropertyImageInline(admin.TabularInline):
     model = PropertyImage
+
+
+class PropertyAmenityInline(admin.TabularInline):
+    model = PropertyAmenity
+    search_fields = ['amenity__name']
+    autocomplete_fields = ['amenity']
 
 
 class PropertyUnitImageInline(admin.TabularInline):
@@ -45,4 +57,4 @@ class PropertyUnitAdmin(admin.ModelAdmin):
     list_editable = ['published']
     search_fields = ('name',)
     autocomplete_fields = ('property', 'type', 'status')
-    inlines = [PropertyUnitImageInline]
+    inlines = [PropertyUnitImageInline, PropertyAmenityInline]

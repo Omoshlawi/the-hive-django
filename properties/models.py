@@ -107,7 +107,6 @@ class PropertyUnit(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
-
     def address(self):
         return self.property.fq_address
 
@@ -141,18 +140,24 @@ def ensure_single_primary_image(sender, instance, **kwargs):
         PropertyUnitImage.objects.filter(unit=instance.unit).exclude(pk=instance.pk).update(is_primary=False)
 
 
-class PropertyUnitAmenity(models.Model):
-    unit = models.ForeignKey("properties.PropertyUnit", on_delete=models.CASCADE, related_name='amenities')
-    name = models.CharField(max_length=50)
-    description = models.TextField(null=True, blank=True)
-    icon_name = models.CharField(max_length=50)
+class Amenity(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True, null=True)
+    icon_name = models.CharField(max_length=50, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
 
+
+class PropertyAmenity(models.Model):
+    unit = models.ForeignKey("properties.PropertyUnit", on_delete=models.CASCADE, related_name='amenities')
+    amenity = models.ForeignKey(Amenity, on_delete=models.CASCADE)
+    notes = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.unit.name} - {self.amenity.name}"
+
     class Meta:
-        verbose_name_plural = 'Property UnitAmenities'
-        verbose_name = 'PropertyUnitAmenity'
-        ordering = ('-created_at',)
+        unique_together = ('unit', 'amenity')

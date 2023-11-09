@@ -1,4 +1,5 @@
 {% load static %}
+{% load query_param_tags %}
 {% load i18n %}
 <!-- ============================================================== -->
 <!-- Top header  -->
@@ -22,17 +23,21 @@
             </div>
             <div class="nav-menus-wrapper" style="transition-property: none;">
                 <ul class="nav-menu">
-                    <li class="active"><a href="/">Home<span class="submenu-indicator"></span>
+                    <li class="{% is_active request 'core:home'  %}"><a href="/">Home<span
+                                class="submenu-indicator"></span>
 
-                    <li><a href="{% url 'properties:property-list' %}">Listings<span
+                    <li><a class="{% is_active request 'properties:property-list'  %}"
+                            href="{% url 'properties:property-list' %}">Listings<span
                                 class="submenu-indicator"></span></a>
                     </li>
 
-                    <li><a href="#">Blog<span class="submenu-indicator"></span></a>
+                    <li><a class="{% is_active request 'blogs:blog-list'  %}"
+                            href="{% url 'blogs:blog-list' %}">Blog<span class="submenu-indicator"></span></a>
                     </li>
-                    <li><a href="#">Pricing<span class="submenu-indicator"></span></a>
+                    <li><a class="{% is_active request 'sass:pricing-list'  %}"
+                            href="{% url 'sass:pricing-list' %}">Pricing<span class="submenu-indicator"></span></a>
                     </li>
-                    <li><a href="#">Contact<span class="submenu-indicator"></span></a>
+                    <li><a href="{% url 'core:contact' %}">Contact<span class="submenu-indicator"></span></a>
                     </li>
 
                     <li><a href="#">About Us<span class="submenu-indicator"></span></a>

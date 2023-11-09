@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('properties/', include('properties.urls', namespace='properties')),
+    path('blogs/', include('blog.urls', namespace='blogs')),
+    path('sass/', include('sass.urls', namespace='sass')),
     path('', include('core.urls', namespace='core'))
 ]
 

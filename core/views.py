@@ -17,3 +17,11 @@ def index(request):
 
 def pricing(request):
     return render(request, 'core/pricing.html')
+
+
+def contact(request):
+    return render(request, "core/contact.html")
+
+
+def team(request):
+    render(request, "core/team.html")
