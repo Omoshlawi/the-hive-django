@@ -30,6 +30,13 @@
                             href="{% url 'properties:property-list' %}">Listings<span
                                 class="submenu-indicator"></span></a>
                     </li>
+                    <li><a class="{% is_active request 'agencies:agency-list'  %}"
+                            href="{% url 'agencies:agency-list' %}">Agencies<span class="submenu-indicator"></span></a>
+                    </li>
+                    </li>
+                    <li><a class="{% is_active request 'agents:agent-list'  %}"
+                            href="{% url 'agents:agent-list' %}">Agents<span class="submenu-indicator"></span></a>
+                    </li>
 
                     <li><a class="{% is_active request 'blogs:blog-list'  %}"
                             href="{% url 'blogs:blog-list' %}">Blog<span class="submenu-indicator"></span></a>

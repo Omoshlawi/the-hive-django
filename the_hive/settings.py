@@ -51,7 +51,9 @@ INSTALLED_APPS = [
     'properties',
     'taggit',
     'blog',
-    'sass'
+    'sass',
+    'agencies',
+    'agents',
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 

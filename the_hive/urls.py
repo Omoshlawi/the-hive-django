@@ -25,6 +25,8 @@ urlpatterns = [
     path('properties/', include('properties.urls', namespace='properties')),
     path('blogs/', include('blog.urls', namespace='blogs')),
     path('sass/', include('sass.urls', namespace='sass')),
+    path('agencies/', include('agencies.urls', namespace='agencies')),
+    path('agents/', include('agents.urls', namespace='agents')),
     path('', include('core.urls', namespace='core'))
 ]
 
