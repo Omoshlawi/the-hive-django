@@ -19,6 +19,7 @@ class Person(models.Model):
     phone_number = PhoneNumberField(null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='U')
+    image = models.ImageField(upload_to='avatar', null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     address = models.CharField(max_length=50, blank=True, null=True)
     city = models.CharField(max_length=50, blank=True, null=True)

@@ -41,28 +41,38 @@
 					<div class="grid_agents-wrap">
 
 						<div class="fr-grid-thumb">
-							<a href="agent-page.html">
+							<a href="{% url 'agents:agent-detail' agent.id %}">
 								<span class="verified"><img src="{% static 'assets/img/verified.svg' %}"
 										class="verify mx-auto" alt=""></span>
-								<img src="{% static 'assets/img/team-1.jpg' %}" class="img-fluid mx-auto" alt="">
+								<img src="{% if agent.person.image %}{{agent.person.image.url}} {% else %} https://picsum.photos/id/237/200/300 {% endif %}"
+									class="img-fluid mx-auto" alt="">
 							</a>
 						</div>
 
 						<div class="fr-grid-deatil">
-							<span><i class="ti-location-pin me-1"></i>Montreal, USA</span>
-							<h5 class="fr-can-name"><a href="agent-page.html">Adam K. Jollio</a></h5>
+							<span><i class="ti-location-pin me-1"></i>{{agent.address|default:"Address"}}</span>
+							<h5 class="fr-can-name"><a
+									href="{% url 'agents:agent-detail' agent.id %}">{{agent.person}}</a></h5>
 							<ul class="inline_social">
-								<li><a href="#" class="fb"><i class="ti-facebook"></i></a></li>
-								<li><a href="#" class="ln"><i class="ti-linkedin"></i></a></li>
-								<li><a href="#" class="ins"><i class="ti-instagram"></i></a></li>
-								<li><a href="#" class="tw"><i class="ti-twitter"></i></a></li>
+								<li><a href="{{agent.facebook | default:'#'}}" class="fb"><i
+											class="ti-facebook"></i></a>
+								</li>
+								<li><a href="{{agent.linkedin | default:'#'}}" class="ln"><i
+											class="ti-linkedin"></i></a>
+								</li>
+								<li><a href="{{agent.instagram | default:'#'}}" class="ins"><i
+											class="ti-instagram"></i></a>
+								</li>
+								<li><a href="{{agent.twitter | default:'#'}}" class="tw"><i class="ti-twitter"></i></a>
+								</li>
 							</ul>
 						</div>
 
 						<div class="fr-infos-deatil">
 							<a href="#" data-bs-toggle="modal" data-bs-target="#autho-message" class="btn btn-danger"><i
 									class="fa fa-envelope me-2"></i>Message</a>
-							<a href="#" class="btn btn-dark"><i class="fa fa-phone"></i></a>
+							<a href="tel: {{agent.person.phone_number}}" class="btn btn-dark"><i
+									class="fa fa-phone"></i></a>
 						</div>
 
 					</div>

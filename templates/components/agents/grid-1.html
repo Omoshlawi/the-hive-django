@@ -1,0 +1,46 @@
+{% load static %}
+{% load humanize %}
+<!-- 
+    args: 
+    -   agent
+    -   root_class(Optional)
+
+    Parent class = row justify-content-center g-4
+ -->
+
+<div class="{% if root_class %} {{root_class}} {% else %}col-lg-4 col-md-6 col-sm-12{% endif %}">
+    <div class="grid_agents style-2">
+        <div class="elio_mx_list bg-seegreen z-1">20 Listings</div>
+        <div class="grid_agents-wrap">
+
+            <div class="fr-grid-thumb">
+                <a href="{% url 'agents:agent-detail' agent.id %}">
+                    {% if agent.person.image %}
+                    <img src="{{agent.person.image.url}}" class="img-fluid mx-auto" alt="">
+                    {% else %}
+                    <img src="https://picsum.photos/id/237/200/300" class="img-fluid mx-auto" alt="">
+                    {% endif %}
+                </a>
+                <ul class="inline_social">
+                    <li><a href="{{agent.facebook | default:'#'}}"><i class="ti-facebook"></i></a></li>
+                    <li><a href="{{agent.linkedin | default:'#'}}"><i class="ti-linkedin"></i></a></li>
+                    <li><a href="{{agent.instagram | default:'#'}}"><i class="ti-instagram"></i></a></li>
+                    <li><a href="{{agent.twitter | default:'#'}}"><i class="ti-twitter"></i></a></li>
+                </ul>
+            </div>
+
+            <div class="fr-grid-deatil">
+                <span><i class="ti-location-pin me-1"></i>{{agent.address | default:"Adress"}}</span>
+                <h5 class="fr-can-name"><a href="{% url 'agents:agent-detail' agent.id %}">{{agent.person}}</a></h5>
+            </div>
+
+            <div class="fr-infos-deatil">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#autho-message" class="btn btn-danger"><i
+                        class="fa fa-envelope me-2"></i>Message</a>
+                <a href="tel: {{agent.person.phone_number}}" class="btn btn-dark"><i class="fa fa-phone"></i></a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
