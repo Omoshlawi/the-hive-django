@@ -28,6 +28,9 @@ class Agency(PublishableModel):
     linkedin = models.URLField(null=True, blank=True)
     tags = TaggableManager()
 
+    def __str__(self):
+        return self.name
+
     @property
     def fq_address(self):
         return f"{self.zipcode} {self.state} {self.address}, {self.city}"

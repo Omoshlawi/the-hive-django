@@ -11,7 +11,13 @@ class Role(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Privilege(models.Model):
     privilege_code = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name

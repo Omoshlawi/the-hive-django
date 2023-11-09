@@ -27,6 +27,9 @@ class Person(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 
 class PersonAttribute(models.Model):
     """
@@ -36,16 +39,23 @@ class PersonAttribute(models.Model):
     name = models.CharField(max_length=50)
     value = models.CharField(max_length=255)
 
+    def __str__(self):
+        return f"{self.person}'s {self.name} Attribute"
+
 
 class PropertyOwner(models.Model):
     """
     Any Object owning a property, can be a system user or can be added by another user
     """
-    person = models.ForeignKey('stakeholders.Person', related_name='property_owners', on_delete=models.CASCADE, null=True,
-                             blank=True)
+    person = models.ForeignKey('stakeholders.Person', related_name='property_owners', on_delete=models.CASCADE,
+                               null=True,
+                               blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.person}"
 
 
 class PropertyStaff(models.Model):
@@ -60,6 +70,9 @@ class PropertyStaff(models.Model):
     class Meta:
         unique_together = ('person', 'property')
 
+    def __str__(self):
+        return f"{self.person}({self.property})"
+
 
 class Tenant(models.Model):
     """
@@ -71,6 +84,9 @@ class Tenant(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"{self.person}"
+
 
 class PropertyStaffRole(models.Model):
     staff = models.ForeignKey('stakeholders.PropertyStaff', on_delete=models.CASCADE, related_name='staff_roles')
@@ -81,3 +97,5 @@ class PropertyStaffRole(models.Model):
     class Meta:
         unique_together = ('staff', 'role')
 
+    def __str__(self):
+        return f"{self.staff}'s {self.role} Role"
